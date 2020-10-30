@@ -1,0 +1,74 @@
+<div class="container d-flex justify-content-center">
+    <form method="POST" action="/results">
+        <div class="form-group row mt-3">
+            <h2>News Search</h2>
+            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Please enter a keyword">
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="country" value="us" id="us" class="custom-control-input">
+                    <label for="us" class="custom-control-label">
+                        <img src="/images/us.png" alt="us flag">
+                    </label>
+                </div>    
+            </div>
+            <div class="col">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="country" value="uk" id="uk" class="custom-control-input">
+                    <label for="uk" class="custom-control-label">
+                        <img src="/images/uk.png" alt="uk flag">
+                    </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="country" value="fr" id="fr" class="custom-control-input">
+                    <label for="fr" class="custom-control-label">
+                        <img src="/images/fr.png" alt="fr flag">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="country" value="sg" id="sg" class="custom-control-input">
+                    <label for="sg" class="custom-control-label">
+                        <img src="/images/sg.png" alt="sg flag">
+                    </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="country" value="jp" id="jp" class="custom-control-input">
+                    <label for="jp" class="custom-control-label">
+                        <img src="/images/jp.png" alt="jp flag">
+                    </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="country" value="cn" id="cn" class="custom-control-input">
+                    <label for="cn" class="custom-control-label">
+                        <img src="/images/cn.png" alt="cn flag">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <select class="custom-select" name="category">
+                <option value="business">Business</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="general">General</option>
+                <option value="health">Health</option>
+                <option value="science">Science</option>
+                <option value="sports">Sports</option>
+                <option value="technology">Technology</option>
+            </select>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
+        </div> 
+    </form>
+</div>
