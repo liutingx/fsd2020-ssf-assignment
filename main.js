@@ -11,7 +11,7 @@ const PORT = parseInt(process.argv[2]) || parseInt(process.env.PORT) || 3000
 const ENDPOINT = "https://newsapi.org/v2/top-headlines"
 
 //API_KEY
-const API_KEY = process.env.API_KEY || '537fbab1ee9c41d6b66bc08366af9a8b'
+const API_KEY = process.env.API_KEY || ''
 
 //create express instance
 const app = express()
