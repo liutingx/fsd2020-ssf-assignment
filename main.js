@@ -11,7 +11,7 @@ const PORT = parseInt(process.argv[2]) || parseInt(process.env.PORT) || 3000
 const ENDPOINT = "https://newsapi.org/v2/top-headlines"
 
 //API_KEY
-const API_KEY = process.env.API_KEY || ''
+const API_KEY = process.env.API_KEY || '537fbab1ee9c41d6b66bc08366af9a8b'
 
 //create express instance
 const app = express()
@@ -54,8 +54,9 @@ app.post('/results',
         const search = req.body.keyword
         const country = req.body.country
         const category = req.body.category
-        const showResult = []
 
+        //check if req.body is in caches
+        // if not in, put into caches and fetch the url and add data into searchResults array
         if(!JSON.stringify(caches).includes(JSON.stringify(req.body))){
             caches.push(req.body)
         
@@ -73,25 +74,28 @@ app.post('/results',
             const result = await fetch(url, {headers})
             const data = await result.json()
             
-            //searchResult = data.articles
-            for (let d of data.articles){//"in" results in 0, 1, 2 | "of" results in the content of array
-                const title = d['title'] //if no title, d['title] results in null, d.title results in error
-                const imgUrl = d['urlToImage']
-                const summary = d['description']
-                const publish = d['publishedAt']
-                const resultUrl = d['url']
-                searchResult.push({title, imgUrl, summary, publish, resultUrl, search, country, category})
+            data.articles.map(
+                d => { //using push instead of return so that the data is stacked in searchResult
+                    searchResult.push({title: d.title, imgUrl: d.urlToImage, summary: d.description, publish: d.publishedAt, resultUrl: d.url, 
+                    search: req.body})
+                }
+            )
+        }
+        console.info('searchResult',searchResult)
+
+        const showResult = searchResult
+        .filter( //filter out d.search != req.body
+            d => {
+                return JSON.stringify(d.search) == JSON.stringify(req.body)
+            })
+        .map(
+            d => {
+                return {title: d.title, imgUrl: d.imgUrl, summary: d.summary, publish: d.publish, resultUrl: d.resultUrl}
             }
-        }
-        
-        for(let each in searchResult){
-            if(searchResult[each].search == search && searchResult[each].country == country && searchResult[each].category == category){
-                showResult.push(searchResult[each])
-            } 
-        }
+        )
+
         console.info('showresult', showResult)
-        
-        
+         
         resp.status(201)
         resp.type('text/html')
         resp.render('results',{
